@@ -123,13 +123,13 @@ tags:
 
 > space-between 使每个块之间产生相同大小的间隔，但不会在容器和块之间产生
 
-![](https://note.youdao.com/yws/api/personal/file/WEB07ddd7e48a6026ef69dd96180acf9d1f?method=getImage&version=113&cstk=amrz7fuG)
+![space-between](space-between.png)
 
 - **space-around**
 
 > space-around 则会在每个块的两边产生一个相同大小的间隔，也就是说最外层块和容器之间的间隔大小刚好是两块之间间隔大小的一半（每个块产生的间隔不重叠，所以间隔变成两倍）。
 
-![](https://note.youdao.com/yws/api/personal/file/WEBdb013a4deeb537394743579b7de10c6f?method=getImage&version=112&cstk=amrz7fuG)
+![space-around](space-around.png)
 
 ### 16.flex 布局，一左一右
 
