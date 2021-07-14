@@ -258,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/12/21/git/">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2020/03/08/vueSourceCode1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nancyyn">
@@ -277,7 +277,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/21/git/" itemprop="url">Git命令</a></h1>
+                <a class="post-title-link" href="/2020/03/08/vueSourceCode1/" itemprop="url">vue2源码之变化侦测篇</a></h1>
         
 
         <div class="post-meta">
@@ -289,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T15:55:22+08:00">
-                2019-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-08T15:55:22+08:00">
+                2020-03-08
               </time>
             
 
@@ -312,8 +312,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">Git命令</span>
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
                   </a>
                 </span>
 
@@ -350,15 +350,19 @@
 
       
         
-          <h3 id="1-初次运行-Git-前的配置"><a href="#1-初次运行-Git-前的配置" class="headerlink" title="1.初次运行 Git 前的配置"></a>1.初次运行 Git 前的配置</h3><ul>
-<li>git config –global user.name “Nancy” #设置用户名</li>
-<li>git config –global user.email “<a href="mailto:Nancy@163.com">Nancy@163.com</a>“ #设置邮件地址</li>
-<li>git config –list #检查配置信息</li>
+          <p><strong>vue2 源码 总结分为四部分，本节为第一部分：</strong></p>
+<h3 id="1-变化侦测篇"><a href="#1-变化侦测篇" class="headerlink" title="1. 变化侦测篇"></a>1. 变化侦测篇</h3><h4 id="1-1-前言"><a href="#1-1-前言" class="headerlink" title="1.1 前言"></a>1.1 前言</h4><ul>
+<li>Vue 最大的特点之一就是数据驱动视图，我们可以把数据理解为状态，而视图就是用户可直观看到页面。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user.name=Nancy</span><br><span class="line">user.email=Nancy@<span class="number">163.</span>com</span><br><span class="line">color.status=auto</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>UI = render(state)</p>
+<p>上述公式中：状态 state 是输入，页面 UI 输出，状态输入一旦变化了，页面输出也随之而变化。我们把这种特性称之为数据驱动视图。</p>
+<p>变化侦测就是追踪状态，亦或者说是数据的变化，一旦发生了变化，就要去更新视图。</p>
+<p>变化侦测可不是个新名词，它在目前的前端三大框架中均有涉及。在 Angular 中是通过脏值检查流程来实现变化侦测；在 React 是通过对比虚拟 DOM 来实现变化侦测，而在 Vue 中也有自己的一套变化侦测实现机制</p>
+</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/12/21/git/#more" rel="contents">
+            <a class="btn" href="/2020/03/08/vueSourceCode1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -409,7 +413,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/12/10/npmRelease/">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2020/01/10/vueRouter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nancyyn">
@@ -428,7 +432,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/10/npmRelease/" itemprop="url">npm发布到私服</a></h1>
+                <a class="post-title-link" href="/2020/01/10/vueRouter/" itemprop="url">vueRouter</a></h1>
         
 
         <div class="post-meta">
@@ -440,8 +444,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-10T15:55:22+08:00">
-                2019-12-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-10T15:55:22+08:00">
+                2020-01-10
               </time>
             
 
@@ -463,8 +467,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/npm%E5%8F%91%E5%B8%83%E5%88%B0%E7%A7%81%E6%9C%8D/" itemprop="url" rel="index">
-                    <span itemprop="name">npm发布到私服</span>
+                  <a href="/categories/vueRouter/" itemprop="url" rel="index">
+                    <span itemprop="name">vueRouter</span>
                   </a>
                 </span>
 
@@ -501,321 +505,21 @@
 
       
         
-          
-            <h3 id="1-从本地发布到私服"><a href="#1-从本地发布到私服" class="headerlink" title="1. 从本地发布到私服"></a>1. 从本地发布到私服</h3><h4 id="1-1-指定-registry"><a href="#1-1-指定-registry" class="headerlink" title="1.1 指定 registry"></a>1.1 指定 registry</h4><p>可以在命令行中<br><code>npm publish --registry=http://192.168.0.191:8888/repository/rdmu-npm/</code><br><strong>或者</strong><br>在<code>package.json</code>文件下添加<code>publishConfig</code>属性</p>
-<p><img src="/2019/12/10/npmRelease/registry.png" alt="registry"></p>
-<h4 id="1-2-使用-npm-login-进行登录"><a href="#1-2-使用-npm-login-进行登录" class="headerlink" title="1.2 使用 npm login 进行登录"></a>1.2 使用 npm login 进行登录</h4><ul>
-<li>指定 registry</li>
+          <h4 id="1-vue-router-是什么-它有哪些组件"><a href="#1-vue-router-是什么-它有哪些组件" class="headerlink" title="1 vue-router 是什么?它有哪些组件"></a>1 vue-router 是什么?它有哪些组件</h4><p><strong>vue-router 是 vue 的路由插件</strong></p>
+<p><strong>组件</strong>：<code>&lt;router-link&gt;</code> <code>&lt;router-view&gt;</code></p>
+<h4 id="2-active-class-是哪个组件的属性？"><a href="#2-active-class-是哪个组件的属性？" class="headerlink" title="2 active-class 是哪个组件的属性？"></a>2 active-class 是哪个组件的属性？</h4><p><strong>active-class</strong> 是 vue-router 模块的 router-link 组件的属性</p>
+<h5 id="active-class-使用方法"><a href="#active-class-使用方法" class="headerlink" title="active-class 使用方法"></a>active-class 使用方法</h5><ul>
+<li>直接在路由 js 文件中配置 linkActiveClass</li>
 </ul>
-<p><code>npm login --registry=http://192.168.0.191:8888/repository/rdmu-npm/</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line"></span><br><span class="line">  linkExactActiveClass: &#39;active&#39;,</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>在输入 username、password、email 后，会报一个错：</li>
+<li>在 router-link 中写入 exact</li>
 </ul>
-<p><img src="/2019/12/10/npmRelease/error1.png" alt="error1"></p>
-<p>是因为本地<img src="/2019/12/10/npmRelease/npmrc.png" alt="npmrc">文件中有之前 npm registry 的记录，打开文件删掉内容即可。</p>
-<p>如果登录后还不能发，检查 npm nexus 的 Realms 设置，把 npm Bearer Token Reaim 放入 Active 中，并保存：</p>
-<p><img src="/2019/12/10/npmRelease/realms.png" alt="realms"></p>
-<h4 id="1-3-npm-publish-发布即可"><a href="#1-3-npm-publish-发布即可" class="headerlink" title="1.3 npm publish 发布即可"></a>1.3 npm publish 发布即可</h4><h3 id="2-从私服上下载-npm-包"><a href="#2-从私服上下载-npm-包" class="headerlink" title="2. 从私服上下载 npm 包"></a>2. 从私服上下载 npm 包</h3><h4 id="2-1-设置从哪个源上下载资源"><a href="#2-1-设置从哪个源上下载资源" class="headerlink" title="2.1 设置从哪个源上下载资源"></a>2.1 设置从哪个源上下载资源</h4><p><code>npm config set @p8-ui:registry=http://192.168.0.191:8888/repository/rdmu-npm/</code></p>
-<h4 id="2-2-从私服上下载资源"><a href="#2-2-从私服上下载资源" class="headerlink" title="2.2 从私服上下载资源"></a>2.2 从私服上下载资源</h4><p><img src="/2019/12/10/npmRelease/error2.png" alt="error2"></p>
-<p>发现私服<code>rdmu-npm</code>上没有 p8-ui 包本身的依赖，后来配置了<code>npm-taobao</code>代理，组合成为<code>npm-group</code>，将源地址设置为<code>npm config set registry http://192.168.0.191:8888/repository/npm-group/</code>，才顺利下载了依赖。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/20/compatibleIE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/20/compatibleIE/" itemprop="url">兼容IE</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T15:55:22+08:00">
-                2019-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%BC%E5%AE%B9IE/" itemprop="url" rel="index">
-                    <span itemprop="name">兼容IE</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1-IE-中安装-chrome-插件"><a href="#1-IE-中安装-chrome-插件" class="headerlink" title="1.IE 中安装 chrome 插件"></a>1.IE 中安装 chrome 插件</h4><h4 id="2-使用-IE-中-window-ActiveXObject-的属性"><a href="#2-使用-IE-中-window-ActiveXObject-的属性" class="headerlink" title="2.使用 IE 中 window.ActiveXObject 的属性"></a>2.使用 IE 中 window.ActiveXObject 的属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var objShell&#x3D;new ActiveXObject(&quot;WScript.Shell&quot;);</span><br><span class="line">    var reject&#x3D;false;</span><br><span class="line">    try&#123;</span><br><span class="line">        var path&#x3D;objShell.RegRead(&quot;HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe\\&quot;);</span><br><span class="line">        path&#x3D;path.replace(&#x2F;\ &#x2F;g,&#39;%20&#39;);&#x2F;&#x2F;空格替换为%20</span><br><span class="line">        &#x2F;&#x2F;path&#x3D;path.replace(&#x2F;\\&#x2F;g,&#39;\\\\&#39;);&#x2F;&#x2F;单斜杠替换为双斜杠</span><br><span class="line">        var url&#x3D;window.location.href.replace(&#39;home.html&#39;, urlQuery);;</span><br><span class="line">        objShell.Run(&quot;file:&#x2F;&#x2F;&#x2F;&quot;+path+&quot; &quot;+url,0,true);</span><br><span class="line">        window.opener&#x3D;null;</span><br><span class="line">        window.open(&#39;&#39;, &#39;_self&#39;, &#39;&#39;);</span><br><span class="line">        window.close();</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err)&#123;</span><br><span class="line">        reject&#x3D;true</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/14/performanceOptimization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/14/performanceOptimization/" itemprop="url">前端性能优化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T15:55:22+08:00">
-                2019-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" itemprop="url" rel="index">
-                    <span itemprop="name">前端性能优化</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="1-优化-DOM"><a href="#1-优化-DOM" class="headerlink" title="1 优化 DOM"></a>1 优化 DOM</h4><ul>
-<li>删除不必要的代码和注释包括空格，尽量做到最小化文件。</li>
-<li>可以利用 GZIP 压缩文件。</li>
-<li>结合 HTTP 缓存文件。</li>
-</ul>
-<h4 id="2-优化-JavaScript"><a href="#2-优化-JavaScript" class="headerlink" title="2 优化 JavaScript"></a>2 优化 JavaScript</h4><p>当浏览器遇到 script 标记时，会阻止解析器继续操作，直到 CSSOM 构建完毕，JavaScript 才会运行并继续完成 DOM 构建过程。</p>
-<ul>
-<li>async: 当我们在 script 标记添加 async 属性以后，浏览器遇到这个 script 标记时会继续解析 DOM，同时脚本也不会被 CSSOM 阻止，即不会阻止 CRP。</li>
-<li>defer: 与 async 的区别在于，脚本需要等到文档解析后（ DOMContentLoaded 事件前）执行，而 async 允许脚本在文档解析时位于后台运行（两者下载的过程不会阻塞 DOM，但执行会）。</li>
-<li>当我们的脚本不会修改 DOM 或 CSSOM 时，推荐使用 async 。</li>
-<li>预加载 —— preload &amp; prefetch 。</li>
-<li>DNS 预解析 —— dns-prefetch 。</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to&#x3D;&quot;&#x2F;&quot; class&#x3D;&quot;menu-home&quot; active-class&#x3D;&quot;active&quot; exact&gt;首页&lt;&#x2F;router-link&gt;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/14/performanceOptimization/#more" rel="contents">
+            <a class="btn" href="/2020/01/10/vueRouter/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -866,7 +570,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/04/algorithm2/">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2020/01/08/vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nancyyn">
@@ -885,7 +589,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/04/algorithm2/" itemprop="url">算法 二</a></h1>
+                <a class="post-title-link" href="/2020/01/08/vue/" itemprop="url">vue</a></h1>
         
 
         <div class="post-meta">
@@ -897,8 +601,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-04T17:32:22+08:00">
-                2019-11-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-08T15:55:22+08:00">
+                2020-01-08
               </time>
             
 
@@ -920,8 +624,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
                   </a>
                 </span>
 
@@ -958,804 +662,334 @@
 
       
         
-          <p><strong>算法总结分为两部分，本节为第二部分：</strong></p>
-<h3 id="7-数组排序"><a href="#7-数组排序" class="headerlink" title="7. 数组排序"></a>7. 数组排序</h3><h4 id="7-1-冒泡排序（Bubble-Sort）"><a href="#7-1-冒泡排序（Bubble-Sort）" class="headerlink" title="7.1 冒泡排序（Bubble Sort）"></a>7.1 冒泡排序（Bubble Sort）</h4><ol>
-<li>冒泡排序它在所有排序算法中最简单。然而， 从运行时间的角度来看，冒泡排序是最差的一个，它的<strong>复杂度是 O(n2)</strong>。</li>
-<li>冒泡排序比较任何两个相邻的项，如果第一个比第二个大，则交换它们。元素向上移动至正确的顺序，就好像<strong>气泡升至表面</strong>一样，冒泡排序因此得名。</li>
-<li>交换时，我们用一个中间值来存储某一交换项的值。其他排序法也会用到这个方法，因此我们声明一个方法放置这段交换代码以便重用。使用 ES6（ECMAScript 2015）<strong>增强的对象属性——对象数组的解构赋值语法</strong>，这个函数可以写成下面 这样：</li>
+          <h3 id="1-说说你对-vue-的理解？"><a href="#1-说说你对-vue-的理解？" class="headerlink" title="1. 说说你对 vue 的理解？"></a>1. 说说你对 vue 的理解？</h3><h4 id="1-1-vue-是什么"><a href="#1-1-vue-是什么" class="headerlink" title="1.1 vue 是什么"></a>1.1 vue 是什么</h4><p>Vue.js（/vjuː/，或简称为 Vue）是一个用于创建用户界面的开源 JavaScript 框架，也是一个创建单页应用的 Web 应用框架。</p>
+<h4 id="1-2-vue-核心特性"><a href="#1-2-vue-核心特性" class="headerlink" title="1.2 vue 核心特性"></a>1.2 vue 核心特性</h4><h5 id="1-2-1-数据驱动（MVVM"><a href="#1-2-1-数据驱动（MVVM" class="headerlink" title="1.2.1 数据驱动（MVVM)"></a>1.2.1 数据驱动（MVVM)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MVVM&#96;表示的是 &#96;Model-View-ViewModel</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Model：模型层，负责处理业务逻辑以及和服务器端进行交互</li>
+<li>View：视图层：负责将数据模型转化为 UI 展示出来，可以简单的理解为 HTML 页面</li>
+<li>ViewModel：视图模型层，用来连接 Model 和 View，是 Model 和 View 之间的通信桥梁</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/08/vue/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/12/30/TypeScript2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nancyyn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nancyyn's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/30/TypeScript2/" itemprop="url">TypeScript 二</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-30T15:55:22+08:00">
+                2019-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>TypeScript 总结分为两部分，本节为第二部分：</strong></p>
+<h3 id="4-类"><a href="#4-类" class="headerlink" title="4.类"></a>4.类</h3><ul>
+<li>继承</li>
+</ul>
+<blockquote>
+<p>类从基类中继承了属性和方法</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Animal &#123;</span><br><span class="line">  name: <span class="built_in">string</span></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">theName: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = theName</span><br><span class="line">  &#125;</span><br><span class="line">  move(distanceInMeters: <span class="built_in">number</span> = <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> moved <span class="subst">$&#123;distanceInMeters&#125;</span>m.`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Snake <span class="keyword">extends</span> Animal &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>(name)</span><br><span class="line">  &#125;</span><br><span class="line">  move(distanceInMeters = <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Slithering...'</span>)</span><br><span class="line">    <span class="keyword">super</span>.move(distanceInMeters)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Horse <span class="keyword">extends</span> Animal &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>(name)</span><br><span class="line">  &#125;</span><br><span class="line">  move(distanceInMeters = <span class="number">45</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Galloping...'</span>)</span><br><span class="line">    <span class="keyword">super</span>.move(distanceInMeters)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sam = <span class="keyword">new</span> Snake(<span class="string">'Sammy the Python'</span>)</span><br><span class="line"><span class="keyword">let</span> tom: Animal = <span class="keyword">new</span> Horse(<span class="string">'Tommy the Palomino'</span>)</span><br><span class="line"></span><br><span class="line">sam.move()</span><br><span class="line">tom.move(<span class="number">34</span>)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/30/TypeScript2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/12/30/TypeScript1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nancyyn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nancyyn's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/30/TypeScript1/" itemprop="url">TypeScript 一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-30T15:55:22+08:00">
+                2019-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>TypeScript 总结分为两部分，本节为第一部分：</strong></p>
+<h3 id="1-基础类型"><a href="#1-基础类型" class="headerlink" title="1.基础类型"></a>1.基础类型</h3><ul>
+<li>布尔值 boolean</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isDone: <span class="built_in">boolean</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数字 number 和 JavaScript 一样，TypeScript 里的所有数字都是浮点数。</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> decLiteral: <span class="built_in">number</span> = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>BigInt</li>
+</ul>
+<p>本节介绍的 bigint 数据类型是用来表示那些已经超出了 number 类型最大值的整数值，对于总是被诟病的整数溢出问题，使用了 bigint 后将完美解决。</p>
+<ol>
+<li>慕课解释<br>bigint 是一种基本数据类型（primitive data type）。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;[array[index1], array[index2]] = [array[index2], array[index1]]</span><br></pre></td></tr></table></figure>
+<p>JavaScript 中可以用 Number 表示的最大整数为 2^53 - 1，可以写为 Number.MAX_SAFE_INTEGER。如果超过了这个界限，可以用 BigInt 来表示，它可以表示任意大的整数。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/04/algorithm2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/04/algorithm1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/04/algorithm1/" itemprop="url">算法 一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-04T17:29:22+08:00">
-                2019-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>算法总结分为两部分，本节为第一部分：</strong></p>
-<h3 id="1-写出打印结果，并解释为什么"><a href="#1-写出打印结果，并解释为什么" class="headerlink" title="1.写出打印结果，并解释为什么"></a>1.写出打印结果，并解释为什么</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">k1</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">var</span> b = a</span><br><span class="line">a.k3 = a = &#123; <span class="attr">k2</span>: <span class="number">2</span> &#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// ?</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// ?</span></span><br></pre></td></tr></table></figure>
-
-<p>打印结果为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">k2</span>: <span class="number">2</span>&#125;</span><br><span class="line">&#123;<span class="attr">k1</span>: <span class="number">1</span>, <span class="attr">k3</span>: &#123;<span class="attr">k2</span>: <span class="number">2</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>关键点</strong></li>
-</ul>
-<blockquote>
-<p>点的优先级大于等号的优先级<br>对象以指针的形式进行存储，每个新对象都是一份新的存储地址</p>
-</blockquote>
-<ul>
-<li><strong>分析</strong></li>
-</ul>
-<blockquote>
-<p>var b = a；b 和 a 都指向同一个地址。<br>.的优先级高于=。所以先执行 a.k3，于是现在的 a 和 b 都是{k1:1,k3:undefined}。<br>=是从右向左执行。所以是执行 a={k2:2}，于是 a 指向了{k2:2}。<br>在执行 a.k3=a。这里注意，a.k3 是最开始执行的，已经是{k1:1,k3:undefined}这个地址了，而不是最一开始的那个 a，所以也就不是{k2:2}了。而且 b 和旧的 a 是指向一个地址的，所以 b 也改变了。<br>但是，=右面的 a，是已经指向了新地址的新 a。<br>所以，a.k3=a 可以看成是{k1:1,k3:undefined}.k3={k2:2}。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/04/algorithm1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/03/JS-interview5/" itemprop="url">JS 五</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T15:04:50+08:00">
-                2019-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>JS 面试总结分为五部分，本节为第五部分：</strong></p>
-<h3 id="11-promise-特点、优缺点、手动实现-Promise"><a href="#11-promise-特点、优缺点、手动实现-Promise" class="headerlink" title="11.promise 特点、优缺点、手动实现 Promise"></a>11.promise 特点、优缺点、手动实现 Promise</h3><h4 id="11-1-Promise-基本特性"><a href="#11-1-Promise-基本特性" class="headerlink" title="11.1 Promise 基本特性"></a>11.1 Promise 基本特性</h4><ul>
-<li><p>Promise 有三种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）。</p>
-</li>
-<li><p>Promise 对象接受一个回调函数作为参数，该回调函数接受两个参数，分别是成功时的回调 resolve 和失败时的回调 reject；另外 resolve 的参数除了正常值以外，还可能是一个 Promise 对象的实例；reject 的参数通常是一个 error 对象的实例。</p>
-</li>
-<li><p>then 方法返回一个新的 Promise 实例，并接收两个参数 onResolved（fulfilled 状态的回调）；onRejected（rejected 状态的回调，该参数可选）。</p>
-</li>
-<li><p>catch 方法返回一个新的 Promise 实例。</p>
-</li>
-<li><p>Promise.all()方法将多个 Promise 实例包装成一个新的 Promise 实例，该方法接受一个由 Promise 对象组成的数组作为参数，注意参数中只要有一个实例触发 canth 方法，都会触发 Promise.all()方法返回的新的实例的 catch 方法，如果参数中的某个实例本身调用了 catch 方法，将不会触发 Promise.all()方法返回的新实例的 catch 方法。</p>
-</li>
-<li><p>Promise.race()方法的参数与 Promise.all()方法一样，参数中的实例只要有一个率先改变状态就会将该实例的状态传给 Promise.race()方法，并将返回值作为 Promise.race()方法产生的 Promise 实例的返回值。</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/03/JS-interview5/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/03/JS-interview4/" itemprop="url">JS 四</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T14:59:50+08:00">
-                2019-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>JS 面试总结分为五部分，本节为第四部分：</strong></p>
-<h3 id="9-类数组和数组的区别，dom-的类数组如何转换为数组"><a href="#9-类数组和数组的区别，dom-的类数组如何转换为数组" class="headerlink" title="9.类数组和数组的区别，dom 的类数组如何转换为数组"></a>9.类数组和数组的区别，dom 的类数组如何转换为数组</h3><h4 id="9-1-定义"><a href="#9-1-定义" class="headerlink" title="9.1 定义"></a>9.1 定义</h4><p><strong>数组是一个特殊对象，与常规对象的区别：</strong></p>
-<ul>
-<li><p>当有新元素添加到列表中时，自动更新 length 属性；</p>
-</li>
-<li><p>设置 length 属性，可以截断数组；</p>
-</li>
-<li><p>从 Array.prototype 中继承了方法；</p>
-</li>
-<li><p>属性为’Array’。</p>
-</li>
-<li><p><strong>类数组是一个拥有 length 属性，并且它属性为非负整数的普通对象，类数组不能直接调用数组方法。</strong></p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/03/JS-interview4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/03/JS-interview3/" itemprop="url">JS 三</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T14:55:50+08:00">
-                2019-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>JS 面试总结分为五部分，本节为第三部分：</strong></p>
-<h3 id="6-介绍防抖节流原理、区别以及应用，并用-JavaScript-进行实现"><a href="#6-介绍防抖节流原理、区别以及应用，并用-JavaScript-进行实现" class="headerlink" title="6.介绍防抖节流原理、区别以及应用，并用 JavaScript 进行实现"></a>6.介绍防抖节流原理、区别以及应用，并用 JavaScript 进行实现</h3><h4 id="6-1-防抖"><a href="#6-1-防抖" class="headerlink" title="6.1 防抖"></a>6.1 防抖</h4><p><strong>原理</strong>：在事件被触发 n 秒后再执行回调，如果在这 n 秒内又被触发，则重新计时。<br><strong>使用场景</strong>：</p>
-<ul>
-<li><p>按钮提交场景：防止多次提交按钮，只执行最后提交的一次。</p>
-</li>
-<li><p>搜索框联想场景：防止联想发送请求，只发送最后一次输入（用户在不断输入值时，用防抖来节约请求资源）。</p>
-</li>
-</ul>
-<p><strong>简易版实现</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">const</span> args = <span class="built_in">arguments</span></span><br><span class="line">    clearTimeout(timeout)</span><br><span class="line">    timeout = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      func.apply(context, args)</span><br><span class="line">    &#125;, wait)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/03/JS-interview3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nancyyn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nancyyn's">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/03/JS-interview2/" itemprop="url">JS 二</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T14:50:50+08:00">
-                2019-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>JS 面试总结分为五部分，本节为第二部分：</strong></p>
-<h3 id="3-call-与-apply"><a href="#3-call-与-apply" class="headerlink" title="3.call() 与 apply()"></a>3.call() 与 apply()</h3><h4 id="3-1-call"><a href="#3-1-call" class="headerlink" title="3.1 call()"></a>3.1 call()</h4><ul>
-<li><strong>方法重用</strong><br>call() 方法可以用来调用所有者对象作为参数的方法。</li>
-</ul>
-<p>通过 call()，您能够使用属于另一个对象的方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">本例调用 person 的 fullName 方法，并用于 person1：</span><br><span class="line"></span><br><span class="line">实例</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    fullName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">" "</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">    firstName:<span class="string">"Bill"</span>,</span><br><span class="line">    lastName: <span class="string">"Gates"</span>,</span><br><span class="line">&#125;j</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;</span><br><span class="line">    firstName:<span class="string">"Steve"</span>,</span><br><span class="line">    lastName: <span class="string">"Jobs"</span>,</span><br><span class="line">&#125;</span><br><span class="line">person.fullName.call(person1);  <span class="comment">// 将返回 "Bill Gates"</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/03/JS-interview2/#more" rel="contents">
+            <a class="btn" href="/2019/12/30/TypeScript1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1797,7 +1031,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
   </nav>
 
 
