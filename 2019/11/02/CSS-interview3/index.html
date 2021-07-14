@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试,Css," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CSS 面试总结分为三部分，本节为第三部分： 11.css 超出省略怎么写，三行超出省略怎么写 单行  123456.single-ellipsis &amp;#123;  width: 500px;  overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;&amp;#125;   多行  12345678.multiline-ellip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 三">
+<meta property="og:url" content="http://nancyyn.github.com/2019/11/02/CSS-interview3/index.html">
+<meta property="og:site_name" content="Nancyyn&#39;s">
+<meta property="og:description" content="CSS 面试总结分为三部分，本节为第三部分： 11.css 超出省略怎么写，三行超出省略怎么写 单行  123456.single-ellipsis &amp;#123;  width: 500px;  overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;&amp;#125;   多行  12345678.multiline-ellip">
+<meta property="og:image" content="http://nancyyn.github.com/2019/11/02/CSS-interview3/space-between.png">
+<meta property="og:image" content="http://nancyyn.github.com/2019/11/02/CSS-interview3/space-around.png">
+<meta property="article:published_time" content="2019-11-02T09:45:30.000Z">
+<meta property="article:modified_time" content="2021-06-30T08:18:09.703Z">
+<meta property="article:author" content="Nancyyn">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://nancyyn.github.com/2019/11/02/CSS-interview3/space-between.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Nancyyn.github.com/2019/11/02/CSS-interview3/"/>
+
+
+
+
+
+  <title>CSS 三 | Nancyyn's</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nancyyn's</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心若向阳，无畏悲伤</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/02/CSS-interview3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nancyyn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nancyyn's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS 三</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-02T17:45:30+08:00">
+                2019-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>CSS 面试总结分为三部分，本节为第三部分：</strong></p>
+<h3 id="11-css-超出省略怎么写，三行超出省略怎么写"><a href="#11-css-超出省略怎么写，三行超出省略怎么写" class="headerlink" title="11.css 超出省略怎么写，三行超出省略怎么写"></a>11.css 超出省略怎么写，三行超出省略怎么写</h3><ul>
+<li>单行</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.single-ellipsis</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多行</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.multiline-ellipsis</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  <span class="attribute">word-break</span>: break-all;</span><br><span class="line">  <span class="attribute">-webkit-box-orient</span>: vertical;</span><br><span class="line">  -webkit-line-clamp: 3; //需要显示的行数</span><br><span class="line">  <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">  <span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="12-css-如何画出一个扇形"><a href="#12-css-如何画出一个扇形" class="headerlink" title="12.css 如何画出一个扇形"></a>12.css 如何画出一个扇形</h3><ul>
+<li>简单版</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 简版一  */</span></span><br><span class="line">.sector1 &#123;</span><br><span class="line">   border-radius: <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">200</span>px;</span><br><span class="line">   width: <span class="number">200</span>px;</span><br><span class="line">   height: <span class="number">200</span>px;</span><br><span class="line">   background: yellowgreen;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">/* 简版二  */</span></span><br><span class="line">.sector1 &#123;</span><br><span class="line">  width: <span class="number">0</span>;</span><br><span class="line">  height: <span class="number">0</span>;</span><br><span class="line">  border-width: <span class="number">100</span>px;</span><br><span class="line">  border-style: solid;</span><br><span class="line">  border-color: transparent transparent red;</span><br><span class="line">  border-radius: <span class="number">100</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-什么是重绘重排，哪些操作会造成重绘重排"><a href="#13-什么是重绘重排，哪些操作会造成重绘重排" class="headerlink" title="13.什么是重绘重排，哪些操作会造成重绘重排"></a>13.什么是重绘重排，哪些操作会造成重绘重排</h3><h4 id="13-1-什么是重绘重排"><a href="#13-1-什么是重绘重排" class="headerlink" title="13.1 什么是重绘重排"></a>13.1 什么是重绘重排</h4><p>当我们改变了一个元素的尺寸位置属性时，会重新进行样式计算（computed style）布局（layout）绘制（paint）以及后面的所有流程，这种行为称为<strong>重排</strong>。</p>
+<p>当改变了某个元素的颜色属性时不会重新触发布局，但还是会触发样式计算和绘制，这就是<strong>重绘</strong>。</p>
+<p>我们可以发现重排和重绘都会占用主线程，还有 JS 也会运行在主线程，所有就会出现抢占执行时间的问题，如果你写了一个不断导致重排重绘的动画，浏览器则需要在每一帧都运行样式计算布局和绘制的操作。</p>
+<h4 id="13-2-触发的一些因素"><a href="#13-2-触发的一些因素" class="headerlink" title="13.2 触发的一些因素"></a>13.2 触发的一些因素</h4><ul>
+<li>页面首次进入的渲染</li>
+<li>浏览器 resize</li>
+<li>元素位置和尺寸发生改变的时候</li>
+<li>可见元素的增删</li>
+<li>内容发生改变</li>
+<li>字体的 font 的改变</li>
+<li>css 伪类激活</li>
+<li>….</li>
+</ul>
+<h4 id="13-3-如果优化"><a href="#13-3-如果优化" class="headerlink" title="13.3 如果优化"></a>13.3 如果优化</h4><p>我们知道当前页面以每秒 60 帧的刷新率时才不会让用户感觉到页面卡顿，如果在运行动画时还有大量的 JS 任务需要执行，因为布局、绘制和 js 执行都是在主线程运行的，当在一帧的时间内布局和绘制结束后，还有剩余时间 js 就会拿到主线程的使用权，如果 js 执行时间过长，就会导致在下一帧开始时 js 没有及时归还主线程，导致下一帧动画没有按时渲染，就会出现页面的卡顿。</p>
+<ul>
+<li><p><strong>第一种优化方式：</strong><br>requestAnimationFrame，它会在每一帧被调用，通过回调 api 的回调，可以把 js 运行任务分成一些更小的任务块，在每一帧事件用完前暂停 js 执行归还主线程，这样的话在下一帧开始时，主线程就可以按时执行布局和绘制。</p>
+</li>
+<li><p><strong>第二种优化方式：</strong><br>栅格化的整个流程不占用主线程，只在合成器线程和栅格线程中运行，这就意味着它无需和 js 抢占主线程。如果反复进行重绘和重排可能会导致掉帧，这是因为有可能 js 执行阻塞了主线程，而 css 中有个动画属性 transform，通过该属性实现的动画不会经过布局和绘制，而是直接运行在合成器线程和栅格线程，所以不会受到主线程 js 执行的影响。更重要的是通过 transform 实现的动画由于不需要经过布局绘制样式计算等操作，所以节省了很多运算事件。</p>
+</li>
+</ul>
+<h4 id="13-4-避免重绘重排具体方案"><a href="#13-4-避免重绘重排具体方案" class="headerlink" title="13.4 避免重绘重排具体方案"></a>13.4 避免重绘重排具体方案</h4><p><strong>13.4.1 CSS</strong></p>
+<ul>
+<li>使用 transform 替代 top 等位移</li>
+<li>使用 visibility 替换 display:none</li>
+<li>避免使用 table 布局</li>
+<li>尽可能在 dom 树的最末端改变 class</li>
+<li>避免设置多层内联样式，尽量层级扁平</li>
+<li>将动画效果应用到 position 属性为 absolute 或 fixed 的元素上</li>
+<li>避免使用 css 表达式</li>
+<li>将频繁重绘或者回流的节点设置为图层，比如 video、iframe</li>
+<li>css 硬件加速（GPU 加速），可以是 transform:translateZ(0)、opacity、filters、will-change，will-change 提前告诉浏览器元素会发生什么变化</li>
+</ul>
+<p><strong>13.4.2 JS</strong></p>
+<ul>
+<li>避免频繁操作样式，合并操作</li>
+<li>避免频繁操作 dom，合并操作</li>
+<li>防抖节流控制频率</li>
+<li>避免频繁读取会引发回流/重绘的属性</li>
+<li>对具有复杂动画的元素使用绝对定位</li>
+</ul>
+<h3 id="14-link-标签不会阻塞-DOM-解析但会阻塞-DOM-渲染，script-标签会阻塞-DOM-的解析和渲染"><a href="#14-link-标签不会阻塞-DOM-解析但会阻塞-DOM-渲染，script-标签会阻塞-DOM-的解析和渲染" class="headerlink" title="14. link 标签不会阻塞 DOM 解析但会阻塞 DOM 渲染，script 标签会阻塞 DOM 的解析和渲染"></a>14. link 标签不会阻塞 DOM 解析但会阻塞 DOM 渲染，script 标签会阻塞 DOM 的解析和渲染</h3><h3 id="15-justify-content-space-between-space-around-有什么区别"><a href="#15-justify-content-space-between-space-around-有什么区别" class="headerlink" title="15.justify-content:space-between\space-around 有什么区别"></a>15.justify-content:space-between\space-around 有什么区别</h3><ul>
+<li><strong>space-between</strong></li>
+</ul>
+<blockquote>
+<p>space-between 使每个块之间产生相同大小的间隔，但不会在容器和块之间产生</p>
+</blockquote>
+<p><img src="/2019/11/02/CSS-interview3/space-between.png" alt="space-between"></p>
+<ul>
+<li><strong>space-around</strong></li>
+</ul>
+<blockquote>
+<p>space-around 则会在每个块的两边产生一个相同大小的间隔，也就是说最外层块和容器之间的间隔大小刚好是两块之间间隔大小的一半（每个块产生的间隔不重叠，所以间隔变成两倍）。</p>
+</blockquote>
+<p><img src="/2019/11/02/CSS-interview3/space-around.png" alt="space-around"></p>
+<h3 id="16-flex-布局，一左一右"><a href="#16-flex-布局，一左一右" class="headerlink" title="16.flex 布局，一左一右"></a>16.flex 布局，一左一右</h3><ul>
+<li>justify-content: space-between;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-flow:  row nowrap;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>给需要在右边显示的元素加 margin-left: auto;</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+            <a href="/tags/Css/" rel="tag"># Css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/02/CSS_interview2/" rel="next" title="CSS 二">
+                <i class="fa fa-chevron-left"></i> CSS 二
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/03/JS-interview1/" rel="prev" title="JS 一">
+                JS 一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Nancyyn" />
+            
+              <p class="site-author-name" itemprop="name">Nancyyn</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-css-超出省略怎么写，三行超出省略怎么写"><span class="nav-number">1.</span> <span class="nav-text">11.css 超出省略怎么写，三行超出省略怎么写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-css-如何画出一个扇形"><span class="nav-number">2.</span> <span class="nav-text">12.css 如何画出一个扇形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-什么是重绘重排，哪些操作会造成重绘重排"><span class="nav-number">3.</span> <span class="nav-text">13.什么是重绘重排，哪些操作会造成重绘重排</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-1-什么是重绘重排"><span class="nav-number">3.1.</span> <span class="nav-text">13.1 什么是重绘重排</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-触发的一些因素"><span class="nav-number">3.2.</span> <span class="nav-text">13.2 触发的一些因素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-3-如果优化"><span class="nav-number">3.3.</span> <span class="nav-text">13.3 如果优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-4-避免重绘重排具体方案"><span class="nav-number">3.4.</span> <span class="nav-text">13.4 避免重绘重排具体方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-link-标签不会阻塞-DOM-解析但会阻塞-DOM-渲染，script-标签会阻塞-DOM-的解析和渲染"><span class="nav-number">4.</span> <span class="nav-text">14. link 标签不会阻塞 DOM 解析但会阻塞 DOM 渲染，script 标签会阻塞 DOM 的解析和渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-justify-content-space-between-space-around-有什么区别"><span class="nav-number">5.</span> <span class="nav-text">15.justify-content:space-between\space-around 有什么区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-flex-布局，一左一右"><span class="nav-number">6.</span> <span class="nav-text">16.flex 布局，一左一右</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nancyyn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

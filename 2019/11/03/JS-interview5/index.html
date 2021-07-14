@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试,Js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS 面试总结分为五部分，本节为第五部分： 11.promise 特点、优缺点、手动实现 Promise11.1 Promise 基本特性 Promise 有三种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）。  Promise 对象接受一个回调函数作为参数，该回调函数接受两个参数，分别是成功时的回调 resolve 和失败时的回调 reject；另外 r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 五">
+<meta property="og:url" content="http://nancyyn.github.com/2019/11/03/JS-interview5/index.html">
+<meta property="og:site_name" content="Nancyyn&#39;s">
+<meta property="og:description" content="JS 面试总结分为五部分，本节为第五部分： 11.promise 特点、优缺点、手动实现 Promise11.1 Promise 基本特性 Promise 有三种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）。  Promise 对象接受一个回调函数作为参数，该回调函数接受两个参数，分别是成功时的回调 resolve 和失败时的回调 reject；另外 r">
+<meta property="og:image" content="http://nancyyn.github.com/2019/11/03/JS-interview5/async.png">
+<meta property="article:published_time" content="2019-11-03T07:04:50.000Z">
+<meta property="article:modified_time" content="2021-06-30T08:25:36.171Z">
+<meta property="article:author" content="Nancyyn">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://nancyyn.github.com/2019/11/03/JS-interview5/async.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Nancyyn.github.com/2019/11/03/JS-interview5/"/>
+
+
+
+
+
+  <title>JS 五 | Nancyyn's</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nancyyn's</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心若向阳，无畏悲伤</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nancyyn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nancyyn's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS 五</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T15:04:50+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>JS 面试总结分为五部分，本节为第五部分：</strong></p>
+<h3 id="11-promise-特点、优缺点、手动实现-Promise"><a href="#11-promise-特点、优缺点、手动实现-Promise" class="headerlink" title="11.promise 特点、优缺点、手动实现 Promise"></a>11.promise 特点、优缺点、手动实现 Promise</h3><h4 id="11-1-Promise-基本特性"><a href="#11-1-Promise-基本特性" class="headerlink" title="11.1 Promise 基本特性"></a>11.1 Promise 基本特性</h4><ul>
+<li><p>Promise 有三种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）。</p>
+</li>
+<li><p>Promise 对象接受一个回调函数作为参数，该回调函数接受两个参数，分别是成功时的回调 resolve 和失败时的回调 reject；另外 resolve 的参数除了正常值以外，还可能是一个 Promise 对象的实例；reject 的参数通常是一个 error 对象的实例。</p>
+</li>
+<li><p>then 方法返回一个新的 Promise 实例，并接收两个参数 onResolved（fulfilled 状态的回调）；onRejected（rejected 状态的回调，该参数可选）。</p>
+</li>
+<li><p>catch 方法返回一个新的 Promise 实例。</p>
+</li>
+<li><p>Promise.all()方法将多个 Promise 实例包装成一个新的 Promise 实例，该方法接受一个由 Promise 对象组成的数组作为参数，注意参数中只要有一个实例触发 canth 方法，都会触发 Promise.all()方法返回的新的实例的 catch 方法，如果参数中的某个实例本身调用了 catch 方法，将不会触发 Promise.all()方法返回的新实例的 catch 方法。</p>
+</li>
+<li><p>Promise.race()方法的参数与 Promise.all()方法一样，参数中的实例只要有一个率先改变状态就会将该实例的状态传给 Promise.race()方法，并将返回值作为 Promise.race()方法产生的 Promise 实例的返回值。</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h4 id="11-2-Promise-优点"><a href="#11-2-Promise-优点" class="headerlink" title="11.2 Promise 优点"></a>11.2 Promise 优点</h4><ul>
+<li><p>统一异步 API</p>
+<p>Promise 的一个重要优点是它逐渐被用作浏览器的异步 API，统一现在各种各样的 API，以及不兼容的模式和手法。</p>
+</li>
+<li><p>Promise 与事件对比</p>
+<p>和事件相比较，Promise 更适合处理一次性的结果。在结果计算出来之前之后注册回调函数都是可以的，都可以拿到正确的值。Promise 的这个优点很自然。但是，不能使用 Promise 处理多次触发的事件。链式处理是 Promise 的又一优点，但是事件却不能这样链式处理。</p>
+</li>
+<li><p>Promise 与回调对比</p>
+<p>解决了回调地狱的问题，将异步操作以同步操作的流程表达出来。</p>
+</li>
+<li><p>Promise 带来的额外好处是包含了更好的错误处理方式（包含了异常处理），并且写起来很轻松，因为可以重用一些同步的工具，比如：Array.prototype.map()。</p>
+</li>
+</ul>
+<h4 id="11-3-Promise-缺点"><a href="#11-3-Promise-缺点" class="headerlink" title="11.3 Promise 缺点"></a>11.3 Promise 缺点</h4><ul>
+<li><p>无法取消 Promise，一旦新建，它就会立即执行，无法中途取消。</p>
+</li>
+<li><p>如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。</p>
+</li>
+<li><p>当处于 Pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</p>
+</li>
+<li><p>Promise 真正执行回调的时候，定义 Promise 那部分实际上已经走完了，所以 Promise 的报错堆栈上下文不太友好。</p>
+</li>
+</ul>
+<h4 id="11-4-手动实现-Promise"><a href="#11-4-手动实现-Promise" class="headerlink" title="11.4 手动实现 Promise"></a>11.4 手动实现 Promise</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myPromise</span>(<span class="params">constructor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span></span><br><span class="line">  self.status = <span class="string">'pending'</span> <span class="comment">//定义状态改变前的初始状态</span></span><br><span class="line">  self.value = <span class="literal">undefined</span> <span class="comment">//定义状态为resolved的时候的状态</span></span><br><span class="line">  self.reason = <span class="literal">undefined</span> <span class="comment">//定义状态为rejected的时候的状态</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//两个==="pending"，保证了了状态的改变是不不可逆的</span></span><br><span class="line">    <span class="keyword">if</span> (self.status === <span class="string">'pending'</span>) &#123;</span><br><span class="line">      self.value = value</span><br><span class="line">      self.status = <span class="string">'resolved'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//两个==="pending"，保证了了状态的改变是不不可逆的</span></span><br><span class="line">    <span class="keyword">if</span> (self.status === <span class="string">'pending'</span>) &#123;</span><br><span class="line">      self.reason = reason</span><br><span class="line">      self.status = <span class="string">'rejected'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//捕获构造异常</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(resolve, reject)</span><br><span class="line">  &#125; catch (e) &#123;</span><br><span class="line">    reject(e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">myPromise.prototype.then = <span class="function"><span class="keyword">function</span> (<span class="params">onFullfilled, onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">switch</span> (self.status) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'resolved'</span>:</span><br><span class="line">      onFullfilled(self.value)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'rejected'</span>:</span><br><span class="line">      onRejected(self.reason)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> myPromise(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  resolve(<span class="number">1</span>)</span><br><span class="line">&#125;)</span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="11-5-手动实现-Promise-all"><a href="#11-5-手动实现-Promise-all" class="headerlink" title="11.5 手动实现 Promise.all"></a>11.5 手动实现 Promise.all</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promiseAll</span>(<span class="params">promises</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(promises)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">`argument must be a array`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> resolvedCounter = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> promiseNum = promises.length</span><br><span class="line">    <span class="keyword">var</span> resolvedResult = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; promiseNum; i++) &#123;</span><br><span class="line">      <span class="built_in">Promise</span>.resolve(promises[i]).then(</span><br><span class="line">        (value) =&gt; &#123;</span><br><span class="line">          resolvedCounter++</span><br><span class="line">          resolvedResult[i] = value</span><br><span class="line">          <span class="keyword">if</span> (resolvedCounter == promiseNum) &#123;</span><br><span class="line">            <span class="keyword">return</span> resolve(resolvedResult)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          <span class="keyword">return</span> reject(error)</span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">1</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">2</span>)</span><br><span class="line">  &#125;, <span class="number">2000</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">let</span> p3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">3</span>)</span><br><span class="line">  &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;)</span><br><span class="line">promiseAll([p3, p1, p2]).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res) <span class="comment">// [3, 1, 2]</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-页面优化方案"><a href="#12-页面优化方案" class="headerlink" title="12.页面优化方案"></a>12.页面优化方案</h3><h4 id="12-1-软件优化"><a href="#12-1-软件优化" class="headerlink" title="12.1. 软件优化"></a>12.1. 软件优化</h4><ul>
+<li><p><strong>html 优化</strong> 优化布局，减少空格，不用 table 布局，尽量不用 iframe 标签</p>
+</li>
+<li><p><strong>css 优化</strong> 可以用 css 实现的尽量不用 js 实现；css 代码压缩；css 合并；用字体图标代替图片；开启 css 硬件加速；transform 动画由 GPU 控制，支持硬件加速，并不需要软件方面的渲染，使用 top 和 left 实现动画时浏览器发生的重绘</p>
+</li>
+<li><p><strong>js 优化</strong> 图片优化（预加载/懒加载/延时加载）；视频或音频不加载，当点击之后开始单独加载视频或音频；在 js 中尽量减少闭包的使用（原因：闭包会产生不释放的栈内存）</p>
+</li>
+<li><p><strong>http 优化</strong> 尽量减少需要发送的 http 请求</p>
+</li>
+<li><p><strong>缓存方面</strong> 使用浏览器的缓存机制，不需要每次登录或者怎么样都需要再去访问服务器；利用浏览器和服务器端的缓存技术（304 缓存），把一些不经常更新的静态资源文件做缓存处理</p>
+</li>
+</ul>
+<h4 id="12-2-硬件优化"><a href="#12-2-硬件优化" class="headerlink" title="12.2 硬件优化"></a>12.2 硬件优化</h4><ul>
+<li><p><strong>设置负载均衡服务器</strong> 通过负载均衡服务器使得后台数据压力平衡</p>
+</li>
+<li><p><strong>增加带宽</strong> 但是硬件的成本远远高于软件优化</p>
+</li>
+</ul>
+<h3 id="13-async-与-await"><a href="#13-async-与-await" class="headerlink" title="13. async 与 await"></a>13. async 与 await</h3><p>任意一个名称都是有意义的，先从字面意思来理解。async 是“异步”的简写，而 await 可以认为是 async wait 的简写。所以应该很好理解 async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成。</p>
+<h4 id="13-1-async"><a href="#13-1-async" class="headerlink" title="13.1 async"></a>13.1 async</h4><p><strong>async 函数返回的是一个 Promise 对象</strong>， 如果在函数中 <code>return</code> 一个直接量，async 会把这个直接量通过 <code>Promise.resolve()</code> 封装成 Promise 对象。</p>
+<p><img src="/2019/11/03/JS-interview5/async.png" alt="async"></p>
+<p>在最外层不能用 await 获取其返回值的情况下，我们当然应该用原来的方式：<code>then()</code> 链来处理这个 Promise 对象，就像这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">testAsync().then(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v) <span class="comment">// 输出 hello async</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="13-2-await"><a href="#13-2-await" class="headerlink" title="13.2 await"></a>13.2 await</h4><p>因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数，但要清楚，<strong>它等的实际是一个返回值</strong>。注意到 await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。</p>
+<p>如果它等到的<code>不是一个 Promise 对象</code>，那 await 表达式的运算结果就是它等到的东西。</p>
+<p>如果它等到的是一个 Promise 对象，await 就忙起来了，它会<code>阻塞</code>后面的代码，等着 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> fn()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line">f1()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+
+<p>这个代码因为 fn 是属于同步的，所以先打印出 1，然后是 3，但是因为没有 resolve 结果，所以 await 拿不到值，因此不会打印 2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    resolve()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> fn()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line">f1()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<p>这个代码与前面相比多了个 resolve 说明 promise 成功了，所以 await 能拿到结果，因此就是 1 3 2</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+            <a href="/tags/Js/" rel="tag"># Js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/03/JS-interview4/" rel="next" title="JS 四">
+                <i class="fa fa-chevron-left"></i> JS 四
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/04/algorithm1/" rel="prev" title="算法 一">
+                算法 一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Nancyyn" />
+            
+              <p class="site-author-name" itemprop="name">Nancyyn</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-promise-特点、优缺点、手动实现-Promise"><span class="nav-number">1.</span> <span class="nav-text">11.promise 特点、优缺点、手动实现 Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#11-1-Promise-基本特性"><span class="nav-number">1.1.</span> <span class="nav-text">11.1 Promise 基本特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-2-Promise-优点"><span class="nav-number">1.2.</span> <span class="nav-text">11.2 Promise 优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-3-Promise-缺点"><span class="nav-number">1.3.</span> <span class="nav-text">11.3 Promise 缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-4-手动实现-Promise"><span class="nav-number">1.4.</span> <span class="nav-text">11.4 手动实现 Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-5-手动实现-Promise-all"><span class="nav-number">1.5.</span> <span class="nav-text">11.5 手动实现 Promise.all</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-页面优化方案"><span class="nav-number">2.</span> <span class="nav-text">12.页面优化方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#12-1-软件优化"><span class="nav-number">2.1.</span> <span class="nav-text">12.1. 软件优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-2-硬件优化"><span class="nav-number">2.2.</span> <span class="nav-text">12.2 硬件优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-async-与-await"><span class="nav-number">3.</span> <span class="nav-text">13. async 与 await</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-1-async"><span class="nav-number">3.1.</span> <span class="nav-text">13.1 async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-2-await"><span class="nav-number">3.2.</span> <span class="nav-text">13.2 await</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nancyyn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

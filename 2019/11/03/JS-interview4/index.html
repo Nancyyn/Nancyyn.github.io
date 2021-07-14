@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试,Js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS 面试总结分为五部分，本节为第四部分： 9.类数组和数组的区别，dom 的类数组如何转换为数组9.1 定义数组是一个特殊对象，与常规对象的区别：  当有新元素添加到列表中时，自动更新 length 属性；  设置 length 属性，可以截断数组；  从 Array.prototype 中继承了方法；  属性为’Array’。  类数组是一个拥有 length 属性，并且它属性为非负整数的普通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 四">
+<meta property="og:url" content="http://nancyyn.github.com/2019/11/03/JS-interview4/index.html">
+<meta property="og:site_name" content="Nancyyn&#39;s">
+<meta property="og:description" content="JS 面试总结分为五部分，本节为第四部分： 9.类数组和数组的区别，dom 的类数组如何转换为数组9.1 定义数组是一个特殊对象，与常规对象的区别：  当有新元素添加到列表中时，自动更新 length 属性；  设置 length 属性，可以截断数组；  从 Array.prototype 中继承了方法；  属性为’Array’。  类数组是一个拥有 length 属性，并且它属性为非负整数的普通">
+<meta property="article:published_time" content="2019-11-03T06:59:50.000Z">
+<meta property="article:modified_time" content="2021-06-30T07:45:07.186Z">
+<meta property="article:author" content="Nancyyn">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Js">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Nancyyn.github.com/2019/11/03/JS-interview4/"/>
+
+
+
+
+
+  <title>JS 四 | Nancyyn's</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nancyyn's</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心若向阳，无畏悲伤</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Nancyyn.github.com/2019/11/03/JS-interview4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nancyyn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nancyyn's">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS 四</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T14:59:50+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>JS 面试总结分为五部分，本节为第四部分：</strong></p>
+<h3 id="9-类数组和数组的区别，dom-的类数组如何转换为数组"><a href="#9-类数组和数组的区别，dom-的类数组如何转换为数组" class="headerlink" title="9.类数组和数组的区别，dom 的类数组如何转换为数组"></a>9.类数组和数组的区别，dom 的类数组如何转换为数组</h3><h4 id="9-1-定义"><a href="#9-1-定义" class="headerlink" title="9.1 定义"></a>9.1 定义</h4><p><strong>数组是一个特殊对象，与常规对象的区别：</strong></p>
+<ul>
+<li><p>当有新元素添加到列表中时，自动更新 length 属性；</p>
+</li>
+<li><p>设置 length 属性，可以截断数组；</p>
+</li>
+<li><p>从 Array.prototype 中继承了方法；</p>
+</li>
+<li><p>属性为’Array’。</p>
+</li>
+<li><p><strong>类数组是一个拥有 length 属性，并且它属性为非负整数的普通对象，类数组不能直接调用数组方法。</strong></p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h4 id="9-2-区别"><a href="#9-2-区别" class="headerlink" title="9.2.区别"></a>9.2.区别</h4><p><strong>本质：类数组是简单对象，它的原型关系与数组不同</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型关系和原始值转换</span></span><br><span class="line"><span class="keyword">let</span> arrayLike = &#123;</span><br><span class="line">  length: <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrayLike <span class="keyword">instanceof</span> <span class="built_in">Array</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.__proto__.constructor === <span class="built_in">Array</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.toString()) <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.valueOf()) <span class="comment">// &#123;length: 10&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> array = []</span><br><span class="line"><span class="built_in">console</span>.log(array <span class="keyword">instanceof</span> <span class="built_in">Array</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(array.__proto__.constructor === <span class="built_in">Array</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(array.toString()) <span class="comment">// ''</span></span><br><span class="line"><span class="built_in">console</span>.log(array.valueOf()) <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-3-类数组转换为数组"><a href="#9-3-类数组转换为数组" class="headerlink" title="9.3 类数组转换为数组"></a>9.3 类数组转换为数组</h4><p><strong>转换方法</strong></p>
+<ul>
+<li><p>使用 Array.from()</p>
+</li>
+<li><p>使用 Array.prototype.slice.call()</p>
+</li>
+<li><p>使用 Array.prototype.forEach()进行属性遍历并组成新的数组<br><strong>转换须知</strong><br>转换后的数组长度由 length 属性决定，索引不连续时转换结果是连续的，会自动补位</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> al1 = &#123;</span><br><span class="line">  length: <span class="number">4</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">4</span>: <span class="number">4</span>,</span><br><span class="line">  <span class="number">5</span>: <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(al1)) <span class="comment">// [0, 1, undefined, 3]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仅考虑 0 或正整数的索引</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码示例</span></span><br><span class="line"><span class="keyword">let</span> al2 = &#123;</span><br><span class="line">  length: <span class="number">4</span>,</span><br><span class="line">  <span class="string">'-1'</span>: <span class="number">-1</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="number">0</span>,</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(al2)) <span class="comment">// [0, 1, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 slice 转换产生稀疏数组</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码示例</span></span><br><span class="line"><span class="keyword">let</span> al2 = &#123;</span><br><span class="line">  length: <span class="number">4</span>,</span><br><span class="line">  <span class="string">'-1'</span>: <span class="number">-1</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="number">0</span>,</span><br><span class="line">  a: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(al2)) <span class="comment">//[0, 1, empty × 2]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-4-使用数组方法操作类数组注意地方"><a href="#9-4-使用数组方法操作类数组注意地方" class="headerlink" title="9.4 使用数组方法操作类数组注意地方"></a>9.4 使用数组方法操作类数组注意地方</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arrayLike2 = &#123;</span><br><span class="line">  <span class="number">2</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="number">4</span>,</span><br><span class="line">  length: <span class="number">2</span>,</span><br><span class="line">  push: <span class="built_in">Array</span>.prototype.push</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// push 操作的是索引值为 length 的位置</span></span><br><span class="line">arrayLike2.push(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arrayLike2) <span class="comment">// &#123;2: 1, 3: 4, length: 3, push: ƒ&#125;</span></span><br><span class="line">arrayLike2.push(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arrayLike2) <span class="comment">// &#123;2: 1, 3: 2, length: 4, push: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="10-浏览器事件循环机制"><a href="#10-浏览器事件循环机制" class="headerlink" title="10.浏览器事件循环机制"></a>10.浏览器事件循环机制</h3><h4 id="10-1-为什么会有-Event-Loop"><a href="#10-1-为什么会有-Event-Loop" class="headerlink" title="10.1 为什么会有 Event Loop"></a>10.1 为什么会有 Event Loop</h4><p>JaveScript 的<strong>任务</strong>分为两种<strong>同步</strong>和<strong>异步</strong>，它们的处理方式也各自不同，<strong>同步任务</strong>是直接放在主线程上排队依次执行，<strong>异步任务</strong>会放在任务队列中，若有多个异步任务则需要在任务队列中排队等待，任务队列类似于缓冲区，任务下一步会被移到<strong>调用栈</strong>，然后主线程执行调用栈的任务。</p>
+<blockquote>
+<p><strong>调用栈</strong>：调用栈是一个栈结构，函数调用会形成一个栈帧，帧中包含了当前执行函数的参数和局部变量等上下文信息，函数执行完后，它的执行上下文会从栈中弹出。</p>
+</blockquote>
+<p>JavaScript 是<strong>单线程</strong>的，单线程是指 js 引擎中解析和执行 js 代码的线程只有一个（主线程），每次只能做一件事情，然而 ajax 请求中，主线程在等待相应的过程中会去做其他事情，浏览器先在事件表注册 ajax 的回调函数，响应回来后回调函数被添加到任务队列中等待执行，不会造成线程阻塞，所以说 js 处理 ajax 请求的方式是异步的。</p>
+<p>综上所述，检查调用栈是否为空以及将某个任务添加到调用栈中的过程就是 Event Loop，这就是 javaScript 实现异步的核心。</p>
+<h4 id="10-2-浏览器中的-Event-Loop"><a href="#10-2-浏览器中的-Event-Loop" class="headerlink" title="10.2 浏览器中的 Event Loop"></a>10.2 浏览器中的 Event Loop</h4><h5 id="10-2-1-Micro-Task（微任务）和-Macro-Task（宏任务）"><a href="#10-2-1-Micro-Task（微任务）和-Macro-Task（宏任务）" class="headerlink" title="10.2.1 Micro-Task（微任务）和 Macro-Task（宏任务）"></a>10.2.1 Micro-Task（微任务）和 Macro-Task（宏任务）</h5><ul>
+<li><p>浏览器端事件循环中的异步队列有两种：macro（宏任务）队列和 micro（微任务）队列。</p>
+</li>
+<li><p>常见的 macro-task：setTimeout、setInterval、script（整体代码）、I/O 操作、UI 渲染等。</p>
+</li>
+<li><p>常见的 micro-task：new Promise().then(回调)、MutationObserve 等。</p>
+</li>
+</ul>
+<h5 id="10-2-2-requestAnimationFrame"><a href="#10-2-2-requestAnimationFrame" class="headerlink" title="10.2.2 requestAnimationFrame"></a>10.2.2 requestAnimationFrame</h5><p>requestAnimationFrame 也属于异步执行的方法，但该方法既不属于宏任务，也不属于微任务，按照 MDN 中的定义：</p>
+<blockquote>
+<p>window.requestAnimationFrame()告诉浏览器—–你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行。<br>requestAnimationFrame 是 GUI 渲染之前执行，但在 Micro-Task 之后，不过 requestAnimationFrame 不一定会在当前帧必须执行，由浏览器根据当前的策略自行决定在哪一帧执行。</p>
+</blockquote>
+<h5 id="10-2-3-async-await"><a href="#10-2-3-async-await" class="headerlink" title="10.2.3 async/await"></a>10.2.3 async/await</h5><ul>
+<li>async<br>当我们在函数前使用 async 的时候，使得该函数返回的是一个 Promise 对象</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> <span class="comment">// async的函数会在这里帮我们隐式使用Promise.resolve(1)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于下面的代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">1</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见 async 只是一个语法糖，只是帮助我们返回一个 Promise 而已</p>
+<ul>
+<li>await<br>await 表示等待，是右侧「表达式」的结果，这个表达式的计算结果可以是 Promise 对象的值或者一个函数的值（换句话说，就是没有特殊限定）。并且只能在带有 async 的内部使用</li>
+</ul>
+<p>使用 await 时，会从右往左执行，当遇到 await 时，会阻塞函数内部处于它后面的代码，去执行该函数外部的同步代码，当外部同步代码执行完毕，再回到该函数内部执行剩余的代码, 并且当 await 执行完毕之后，会先处理微任务队列的代码</p>
+<p>下面来看一个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'async1 start'</span>)</span><br><span class="line">  <span class="keyword">await</span> async2()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'async1 end'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'async2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">async1()</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>下面是在 chrome 浏览器上输出的结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">promise2</span><br><span class="line">async1 end</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure>
+
+<p>使用事件循环机制分析:</p>
+<ul>
+<li>首先执行同步代码，console.log( ‘script start’ )</li>
+<li>遇到 setTimeout,会被推入宏任务队列</li>
+<li>执行 async1(), 它也是同步的，只是返回值是 Promise，在内部首先执行 console.log( ‘async1 start’ )</li>
+<li>然后执行 async2(), 然后会打印 console.log( ‘async2’ )</li>
+<li>从右到左会执行, 当遇到 await 的时候，阻塞后面的代码，去外部执行同步代码</li>
+<li>进入 new Promise,打印 console.log( ‘promise1’ )</li>
+<li>将.then 放入事件循环的微任务队列</li>
+<li>继续执行，打印 console.log( ‘script end’ )</li>
+<li>外部同步代码执行完毕，接着回到 async1()内部, 由于 async2()其实是返回一个 Promise, await async2()相当于获取它的值，其实就相当于这段代码 Promise.resolve(undefined).then((undefined) =&gt; {}),所以.then 会被推入微任务队列, 所以现在微任务队列会有两个任务。接下来处理微任务队列，打印 console.log( ‘promise2’ )，后面一个.then 不会有任何打印，但是会执行</li>
+<li>执行后面的代码, 打印 console.log( ‘async1 end’ )</li>
+<li>进入第二次事件循环，执行宏任务队列, 打印 console.log( ‘setTimeout’ )</li>
+</ul>
+<h5 id="10-2-4-event-loop-过程"><a href="#10-2-4-event-loop-过程" class="headerlink" title="10.2.4 event loop 过程"></a>10.2.4 event loop 过程</h5><blockquote>
+<p>当某个宏任务执行完后，会查看是否有微任务队列。如果有，先执行微任务队列中的所有任务，如果没有，会读取宏任务队列中排在最前的任务，执行宏任务的过程中，遇到微任务，依次加入微任务队列。栈空后，再次读取微任务队列里的任务，依次类推。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          
+            <a href="/tags/Js/" rel="tag"># Js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/03/JS-interview3/" rel="next" title="JS 三">
+                <i class="fa fa-chevron-left"></i> JS 三
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/03/JS-interview5/" rel="prev" title="JS 五">
+                JS 五 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Nancyyn" />
+            
+              <p class="site-author-name" itemprop="name">Nancyyn</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-类数组和数组的区别，dom-的类数组如何转换为数组"><span class="nav-number">1.</span> <span class="nav-text">9.类数组和数组的区别，dom 的类数组如何转换为数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-1-定义"><span class="nav-number">1.1.</span> <span class="nav-text">9.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-2-区别"><span class="nav-number">1.2.</span> <span class="nav-text">9.2.区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-类数组转换为数组"><span class="nav-number">1.3.</span> <span class="nav-text">9.3 类数组转换为数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-4-使用数组方法操作类数组注意地方"><span class="nav-number">1.4.</span> <span class="nav-text">9.4 使用数组方法操作类数组注意地方</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-浏览器事件循环机制"><span class="nav-number">2.</span> <span class="nav-text">10.浏览器事件循环机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-1-为什么会有-Event-Loop"><span class="nav-number">2.1.</span> <span class="nav-text">10.1 为什么会有 Event Loop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-2-浏览器中的-Event-Loop"><span class="nav-number">2.2.</span> <span class="nav-text">10.2 浏览器中的 Event Loop</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-1-Micro-Task（微任务）和-Macro-Task（宏任务）"><span class="nav-number">2.2.1.</span> <span class="nav-text">10.2.1 Micro-Task（微任务）和 Macro-Task（宏任务）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-2-requestAnimationFrame"><span class="nav-number">2.2.2.</span> <span class="nav-text">10.2.2 requestAnimationFrame</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-3-async-await"><span class="nav-number">2.2.3.</span> <span class="nav-text">10.2.3 async&#x2F;await</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-4-event-loop-过程"><span class="nav-number">2.2.4.</span> <span class="nav-text">10.2.4 event loop 过程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nancyyn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
